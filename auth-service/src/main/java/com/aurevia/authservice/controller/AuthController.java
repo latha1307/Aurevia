@@ -1,7 +1,8 @@
 package com.aurevia.authservice.controller;
 
+import com.aurevia.authservice.dto.RegisterRequest;
 import com.aurevia.authservice.entity.User;
-import com.aurevia.authservice.repository.UserRepository;
+import com.aurevia.authservice.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,18 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final UserRepository userRepository;
+    private final AuthService authService;
 
-    @PostMapping("/create")
-public User createUser() {
+    @PostMapping("/register")
+    public User register(@RequestBody RegisterRequest request) {
 
-    User user = new User();
-
-    user.setName("Latha");
-    user.setEmail("ldkannammal@gmail.com");
-    user.setPassword("123456");
-    user.setRole("USER");
-
-    return userRepository.save(user);
-}
+        return authService.register(request);
+    }
 }
