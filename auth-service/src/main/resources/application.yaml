@@ -1,0 +1,13 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: AUTH-SERVICE
+
+  mongodb:
+    uri: mongodb+srv://lathadevibalamurugan_db_user:Latha123@aurevia-cluster.x5qmfa7.mongodb.net/aurevia-auth?retryWrites=true&w=majority&appName=aurevia-cluster
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
