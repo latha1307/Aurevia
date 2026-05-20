@@ -1,7 +1,10 @@
 package com.aurevia.authservice.service;
 
+import com.aurevia.authservice.dto.AuthResponse;
+import com.aurevia.authservice.dto.LoginRequest;
 import com.aurevia.authservice.dto.RegisterRequest;
 import com.aurevia.authservice.entity.User;
+import com.aurevia.authservice.jwt.JwtService;
 import com.aurevia.authservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,7 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public User register(RegisterRequest request) {
 
@@ -27,4 +31,32 @@ public class AuthService {
 
         return userRepository.save(user);
     }
+
+    public AuthResponse login(LoginRequest request) {
+
+    User user = userRepository
+            .findByEmail(request.getEmail())
+            .orElseThrow(() ->
+                    new RuntimeException("User not found"));
+
+    boolean passwordMatches =
+            passwordEncoder.matches(
+                    request.getPassword(),
+                    user.getPassword()
+            );
+
+    if (!passwordMatches) {
+        throw new RuntimeException("Invalid password");
+    }
+
+    String token = jwtService.generateToken(
+            user.getEmail(),
+            user.getRole()
+    );
+
+    return new AuthResponse(
+            "Login successful",
+            token
+    );
+}
 }

@@ -1,5 +1,7 @@
 package com.aurevia.authservice.controller;
 
+import com.aurevia.authservice.dto.AuthResponse;
+import com.aurevia.authservice.dto.LoginRequest;
 import com.aurevia.authservice.dto.RegisterRequest;
 import com.aurevia.authservice.entity.User;
 import com.aurevia.authservice.service.AuthService;
@@ -17,5 +19,12 @@ public class AuthController {
     public User register(@RequestBody RegisterRequest request) {
 
         return authService.register(request);
+    }
+
+    @PostMapping("/login")
+    public AuthResponse login(
+            @RequestBody LoginRequest request
+    ) {
+        return authService.login(request);
     }
 }
