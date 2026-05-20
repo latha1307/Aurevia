@@ -5,10 +5,8 @@ spring:
   application:
     name: AUTH-SERVICE
 
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/aurevia-auth
-
+  mongodb:
+    uri: mongodb+srv://lathadevibalamurugan_db_user:Latha123@aurevia-cluster.x5qmfa7.mongodb.net/aurevia-auth?retryWrites=true&w=majority&appName=aurevia-cluster
 eureka:
   client:
     service-url:
