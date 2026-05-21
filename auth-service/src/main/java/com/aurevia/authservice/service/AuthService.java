@@ -18,18 +18,22 @@ public class AuthService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
-    public User register(RegisterRequest request) {
+    public AuthResponse register(RegisterRequest request) {
+
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new RuntimeException("User already exists");
+        }
 
         User user = new User();
-
         user.setName(request.getName());
         user.setEmail(request.getEmail());
-        user.setPassword(
-        passwordEncoder.encode(request.getPassword())
-        );
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole("USER");
 
-        return userRepository.save(user);
+        userRepository.save(user);
+
+        String token = jwtService.generateToken(user.getEmail(), user.getRole());
+        return new AuthResponse("Registration successful", token);
     }
 
     public AuthResponse login(LoginRequest request) {
