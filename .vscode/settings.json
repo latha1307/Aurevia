@@ -1,3 +1,9 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.project.sourcePaths": [
+        "api-gateway/src/main/java",
+        "auth-service/src/main/java",
+        "discovery-server/src/main/java",
+        "product-service/src/main/java"
+    ]
 }
