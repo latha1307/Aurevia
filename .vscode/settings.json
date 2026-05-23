@@ -4,6 +4,8 @@
         "api-gateway/src/main/java",
         "auth-service/src/main/java",
         "discovery-server/src/main/java",
-        "product-service/src/main/java"
+        "product-service/src/main/java",
+        "cart-service/src/main/java",
+        "inventory-service/src/main/java"
     ]
 }
