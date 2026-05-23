@@ -1,11 +1,10 @@
-package com.aurevia.apigateway.jwt;
+package com.aurevia.productservice.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 
 @Service
@@ -15,9 +14,7 @@ public class JwtService {
             "mysecretkeymysecretkeymysecretkey123456";
 
     private Key getSignKey() {
-        return Keys.hmacShaKeyFor(
-                SECRET.getBytes(StandardCharsets.UTF_8)
-        );
+        return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
     public Claims extractClaims(String token) {
@@ -30,13 +27,10 @@ public class JwtService {
                 .getPayload();
     }
 
-    public boolean isTokenValid(String token) {
+    public String extractRole(String token) {
 
-        try {
-            extractClaims(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        Claims claims = extractClaims(token);
+
+        return claims.get("role", String.class);
     }
 }
