@@ -4,6 +4,8 @@ import com.aurevia.productservice.dto.CreateProductRequest;
 import com.aurevia.productservice.entity.Product;
 import com.aurevia.productservice.service.ProductService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +27,35 @@ public class ProductController {
 
     // GET ALL
     @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public Page<Product> getAllProducts(
+    
+            @RequestParam(defaultValue = "0")
+            int page,
+    
+            @RequestParam(defaultValue = "5")
+            int size,
+    
+            @RequestParam(defaultValue = "")
+            String search,
+    
+            @RequestParam(defaultValue = "")
+            String category,
+    
+            @RequestParam(defaultValue = "name")
+            String sortBy,
+    
+            @RequestParam(defaultValue = "asc")
+            String direction
+    ) {
+    
+        return productService.getAllProducts(
+                page,
+                size,
+                search,
+                category,
+                sortBy,
+                direction
+        );
     }
 
     // GET BY ID
