@@ -5,7 +5,9 @@
     { "path": "discovery-server" },
     { "path": "inventory-service" },
     { "path": "product-service" },
-    { "path": "cart-service" }
+    { "path": "cart-service" },
+    { "path": "order-service" },
+    { "path": "payment-service" }
   ],
   "settings": {
     "java.compile.nullAnalysis.mode": "automatic"

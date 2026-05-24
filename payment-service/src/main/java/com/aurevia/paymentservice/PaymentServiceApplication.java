@@ -1,4 +1,4 @@
-package com.aurevia.orderservice;
+package com.aurevia.paymentservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,10 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients
 @SpringBootApplication
-public class OrderServiceApplication {
+public class PaymentServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(OrderServiceApplication.class, args);
+		SpringApplication.run(PaymentServiceApplication.class, args);
 	}
 
 }
