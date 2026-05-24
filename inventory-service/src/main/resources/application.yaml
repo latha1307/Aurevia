@@ -1,0 +1,15 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: INVENTORY-SERVICE
+
+  data:
+    mongodb:
+      uri: mongodb+srv://lathadevibalamurugan_db_user:Latha123@aurevia-cluster.x5qmfa7.mongodb.net/inventory-db?retryWrites=true&w=majority&appName=aurevia-cluster
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

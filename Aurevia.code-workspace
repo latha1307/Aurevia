@@ -1,0 +1,15 @@
+{
+  "folders": [
+    { "path": "api-gateway" },
+    { "path": "auth-service" },
+    { "path": "discovery-server" },
+    { "path": "inventory-service" },
+    { "path": "product-service" },
+    { "path": "cart-service" },
+    { "path": "order-service" },
+    { "path": "payment-service" }
+  ],
+  "settings": {
+    "java.compile.nullAnalysis.mode": "automatic"
+  }
+}
