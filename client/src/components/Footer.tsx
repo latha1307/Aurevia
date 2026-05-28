@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { ShoppingCart, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";

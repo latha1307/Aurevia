@@ -11,6 +11,20 @@ export interface User {
   createdAt: string;
 }
 
+export interface ProductVariant {
+  id: string;
+  name: string;
+  price: number;
+  stock: number;
+  image?: string;
+  options?: string[];
+}
+
+export interface Specification {
+  label: string;
+  value: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -27,6 +41,8 @@ export interface Product {
   vendorId?: string;
   tags?: string[];
   featured?: boolean;
+  variants?: ProductVariant[];
+  specifications?: Specification[];
 }
 
 export interface CartItem {

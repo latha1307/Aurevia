@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router";
+import { Link, useSearchParams } from "react-router-dom";
 import { Star, SlidersHorizontal, Heart } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
@@ -21,62 +21,91 @@ import {
 import { Checkbox } from "../components/ui/checkbox";
 import { Label } from "../components/ui/label";
 import { Slider } from "../components/ui/slider";
-import { mockProducts, categories } from "../data/mockData";
 import { useApp } from "../contexts/AppContext";
 import { toast } from "sonner";
+
+//apis
+import { getProducts } from "../api/product.api";
+import { getCategories } from "../api/category.api";
 
 export function ProductListingPage() {
   const [searchParams] = useSearchParams();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useApp();
-  const [filteredProducts, setFilteredProducts] = useState(mockProducts);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [products, setProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<any[]>([]);
   const [priceRange, setPriceRange] = useState([0, 1000]);
   const [sortBy, setSortBy] = useState("featured");
 
+  const [categories, setCategories] = useState<any[]>([]);
   const category = searchParams.get("category");
   const search = searchParams.get("search");
 
+  const fetchProducts = async () => {
+    try {
+      const products = await getProducts();
+      setProducts(products.content);
+      setFilteredProducts(products.content);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const categories = await getCategories();
+      setCategories(categories);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  }
+
   useEffect(() => {
-    let products = [...mockProducts];
+    fetchProducts();
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    let filtered = [...products];
 
     // Filter by category from URL
     if (category) {
-      products = products.filter((p) => p.category === category);
+      filtered = filtered.filter((p) => p.category === category);
     }
 
     // Filter by search query
     if (search) {
       const query = search.toLowerCase();
-      products = products.filter(
+      filtered = filtered.filter(
         (p) =>
           p.name.toLowerCase().includes(query) ||
           p.description.toLowerCase().includes(query) ||
-          p.tags.some((tag) => tag.toLowerCase().includes(query))
+          p.tags.some((tag: string) => tag.toLowerCase().includes(query))
       );
     }
 
     // Filter by selected categories
     if (selectedCategories.length > 0) {
-      products = products.filter((p) =>
+      filtered = filtered.filter((p) =>
         selectedCategories.includes(p.category)
       );
     }
 
     // Filter by price range
-    products = products.filter(
+    filtered = filtered.filter(
       (p) => p.price >= priceRange[0] && p.price <= priceRange[1]
     );
 
     // Sort products
     switch (sortBy) {
       case "price-low":
-        products.sort((a, b) => a.price - b.price);
+        filtered.sort((a, b) => a.price - b.price);
         break;
       case "price-high":
-        products.sort((a, b) => b.price - a.price);
+        filtered.sort((a, b) => b.price - a.price);
         break;
       case "rating":
-        products.sort((a, b) => b.rating - a.rating);
+        filtered.sort((a, b) => b.rating - a.rating);
         break;
       case "newest":
         // Already in newest order
@@ -86,7 +115,7 @@ export function ProductListingPage() {
         break;
     }
 
-    setFilteredProducts(products);
+    setFilteredProducts(filtered);
   }, [category, search, selectedCategories, priceRange, sortBy]);
 
   const toggleCategory = (cat: string) => {
@@ -123,7 +152,7 @@ export function ProductListingPage() {
                 htmlFor={`cat-${cat.id}`}
                 className="flex-1 cursor-pointer text-sm"
               >
-                {cat.name} ({cat.count})
+                {cat.name}
               </Label>
             </div>
           ))}
@@ -268,7 +297,7 @@ export function ProductListingPage() {
                     {/* Product Image */}
                     <div className="aspect-square overflow-hidden bg-muted relative">
                       <img
-                        src={product.image}
+                        src={product.imageUrl}
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
