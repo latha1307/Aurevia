@@ -56,7 +56,7 @@ export function ProductDetailsPage() {
       name: product.name,
       price: product.price,
       quantity,
-      image: product.image,
+      imageUrl: product.imageUrl,
       variant: Object.values(selectedVariants).join(", "),
     });
     toast.success("Added to cart");

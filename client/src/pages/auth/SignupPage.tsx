@@ -166,7 +166,7 @@ export const SignupPage: React.FC = () => {
         <CardFooter>
           <div className="text-sm text-center text-muted-foreground w-full">
             Already have an account?{' '}
-            <Link to="/login" className="text-primary hover:underline">
+            <Link to="/auth/login" className="text-primary hover:underline">
               Sign in
             </Link>
           </div>

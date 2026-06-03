@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 import type { Product } from '../types';
-import { toast } from 'sonner';
+import { useApp } from '../contexts/AppContext';
 
 interface WishlistContextType {
-  wishlist: Product[];
+  wishlist: string[];
   addToWishlist: (product: Product) => void;
   removeFromWishlist: (productId: string) => void;
   isInWishlist: (productId: string) => boolean;
@@ -13,54 +13,30 @@ interface WishlistContextType {
 const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
 
 export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [wishlist, setWishlist] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const storedWishlist = localStorage.getItem('wishlist');
-    if (storedWishlist) {
-      setWishlist(JSON.parse(storedWishlist));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('wishlist', JSON.stringify(wishlist));
-  }, [wishlist]);
+  const app = useApp();
 
   const addToWishlist = (product: Product) => {
-    setWishlist(prev => {
-      if (!prev.find(p => p.id === product.id)) {
-        toast.success('Added to wishlist');
-        return [...prev, product];
-      }
-      return prev;
-    });
-  };
-
-  const removeFromWishlist = (productId: string) => {
-    setWishlist(prev => prev.filter(p => p.id !== productId));
-    toast.success('Removed from wishlist');
-  };
-
-  const isInWishlist = (productId: string) => {
-    return wishlist.some(p => p.id === productId);
+    app.addToWishlist(product.id);
   };
 
   const toggleWishlist = (product: Product) => {
-    if (isInWishlist(product.id)) {
-      removeFromWishlist(product.id);
+    if (app.isInWishlist(product.id)) {
+      app.removeFromWishlist(product.id);
     } else {
-      addToWishlist(product);
+      app.addToWishlist(product.id);
     }
   };
 
   return (
-    <WishlistContext.Provider value={{
-      wishlist,
-      addToWishlist,
-      removeFromWishlist,
-      isInWishlist,
-      toggleWishlist
-    }}>
+    <WishlistContext.Provider
+      value={{
+        wishlist: app.wishlist,
+        addToWishlist,
+        removeFromWishlist: app.removeFromWishlist,
+        isInWishlist: app.isInWishlist,
+        toggleWishlist,
+      }}
+    >
       {children}
     </WishlistContext.Provider>
   );

@@ -31,7 +31,7 @@ export interface Product {
   description: string;
   price: number;
   originalPrice?: number;
-  image: string;
+  imageUrl: string;
   images?: string[];
   category: string;
   rating: number;

@@ -297,7 +297,7 @@ export function ProductListingPage() {
                     {/* Product Image */}
                     <div className="aspect-square overflow-hidden bg-muted relative">
                       <img
-                        src={product.imageUrl}
+                        src={product.imageUrl || product.images?.[0]}
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
@@ -314,7 +314,7 @@ export function ProductListingPage() {
                           % OFF
                         </Badge>
                       )}
-                      {!product.inStock && (
+                      {!product.stock && (
                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                           <Badge variant="secondary">Out of Stock</Badge>
                         </div>
