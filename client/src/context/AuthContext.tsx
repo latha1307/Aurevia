@@ -1,8 +1,8 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 import type { User, UserRole } from '../types';
 import { useApp } from '../contexts/AppContext';
 import { login as loginRequest, signup as signupRequest } from '../api/auth.api';
-import { setToken as setInMemoryToken, clearToken as clearInMemoryToken } from '../api/tokenStore';
+import { setToken, getToken, clearToken } from '../api/tokenStore';
 
 interface AuthContextType {
   user: User | null;
@@ -46,7 +46,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       throw new Error('Invalid login response');
     }
 
-    setInMemoryToken(response.token);
+    setToken(response.token);
 
     const payloadJson = decodeJwtPayload(response.token);
     const emailFromToken = payloadJson.sub || response.email || email;
@@ -62,7 +62,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (role) {
       const allowedRoles = role === 'admin' ? ['admin', 'super_admin'] : [role];
       if (!allowedRoles.includes(userFromToken.role.toLowerCase())) {
-        clearInMemoryToken();
+        clearToken();
         throw new Error('Invalid role for this account');
       }
     }
@@ -78,19 +78,44 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       email,
       role: response.role,
     });
-    // store token only in memory and set user in context
+    // persist token and set user in context
     if (!response || !response.token) {
       throw new Error('Invalid signup response');
     }
-
-    setInMemoryToken(response.token);
+    setToken(response.token);
     appContext.setUser(newUser);
   };
 
   const logout = () => {
     appContext.setUser(null);
-    clearInMemoryToken();
+    clearToken();
   };
+
+  // On mount, if a token is present (e.g. after page refresh), decode it and restore user
+  useEffect(() => {
+    try {
+      const t = getToken();
+      if (t) {
+        const payloadJson = decodeJwtPayload(t);
+        const emailFromToken = payloadJson.sub || payloadJson.email || '';
+        const roleFromToken = (payloadJson.role || payloadJson.roles || 'customer') as string;
+
+        const userFromToken = buildUserFromResponse({
+          id: payloadJson.id || undefined,
+          name: payloadJson.name || emailFromToken,
+          email: emailFromToken,
+          role: roleFromToken,
+        });
+
+        appContext.setUser(userFromToken);
+      }
+    } catch (err) {
+      // if token is invalid, clear it
+      clearToken();
+    }
+    // run only once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const hasRole = (roles: UserRole[]) => {
     return appContext.user ? roles.includes(appContext.user.role) : false;

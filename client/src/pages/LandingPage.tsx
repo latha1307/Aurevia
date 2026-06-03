@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import type { Product } from "../types";
 import { ArrowRight, Star, Truck, Shield, Headphones } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
@@ -9,14 +10,15 @@ import { getCategories } from "../api/category.api";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 export function LandingPage() {
-  const [featuredProducts, setProducts] = useState<any[]>([]);
+  const [featuredProducts, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
 
   const fetchProducts = async () => {
     try {
       const data = await getProducts();
-      setProducts(data.content);
-      console.log(data.content);
+      const items = Array.isArray(data?.content) ? data.content : [];
+      const featured = items.filter((p: any) => p?.featured === true);
+      setProducts(featured);
     } catch (error) {
       console.log(error);
     }
