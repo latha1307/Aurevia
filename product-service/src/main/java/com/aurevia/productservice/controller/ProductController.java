@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
@@ -70,7 +69,7 @@ public class ProductController {
     @PutMapping("/{id}")
     public Product updateProduct(
             @PathVariable String id,
-            @RequestBody CreateProductRequest request
+            @RequestBody(required = false) CreateProductRequest request
     ) {
         return productService.updateProduct(id, request);
     }

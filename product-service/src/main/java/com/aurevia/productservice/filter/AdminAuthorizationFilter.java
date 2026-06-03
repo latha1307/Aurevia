@@ -1,7 +1,6 @@
 package com.aurevia.productservice.filter;
 
 import com.aurevia.productservice.jwt.JwtService;
-import io.jsonwebtoken.Claims;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

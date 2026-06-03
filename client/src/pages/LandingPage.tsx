@@ -1,13 +1,40 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { ArrowRight, Star, Truck, Shield, Headphones } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
 import { Badge } from "../components/ui/badge";
-import { mockProducts } from "../data/mockData";
+import { getProducts } from "../api/product.api";
+import { getCategories } from "../api/category.api";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback";
 
 export function LandingPage() {
-  const featuredProducts = mockProducts.slice(0, 4);
+  const [featuredProducts, setProducts] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+
+  const fetchProducts = async () => {
+    try {
+      const data = await getProducts();
+      setProducts(data.content);
+      console.log(data.content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const data = await getCategories();
+      setCategories(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+  fetchProducts();
+  fetchCategories();
+    }, []);
 
   return (
     <div className="flex flex-col">
@@ -131,7 +158,7 @@ export function LandingPage() {
                 <Card className="group overflow-hidden h-full hover:shadow-lg transition-shadow">
                   <div className="aspect-square overflow-hidden bg-muted">
                     <img
-                      src={product.image}
+                      src={product.imageUrl}
                       alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
@@ -165,54 +192,45 @@ export function LandingPage() {
       <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold mb-8 text-center">Shop by Category</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Link to="/products?category=Electronics">
-              <Card className="group overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-video overflow-hidden bg-muted">
-                  <ImageWithFallback
-                    src="https://images.unsplash.com/photo-1758979792186-32a5da91f24d?w=600&q=80"
-                    alt="Electronics"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">Electronics</h3>
-                  <p className="text-muted-foreground">Latest tech gadgets and devices</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link to="/products?category=Wearables">
-              <Card className="group overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-video overflow-hidden bg-muted">
-                  <ImageWithFallback
-                    src="https://images.unsplash.com/photo-1652454107898-eb0050b17f29?w=600&q=80"
-                    alt="Wearables"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">Wearables</h3>
-                  <p className="text-muted-foreground">Smartwatches and fitness trackers</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link to="/products?category=Accessories">
-              <Card className="group overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="aspect-video overflow-hidden bg-muted">
-                  <ImageWithFallback
-                    src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80"
-                    alt="Accessories"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">Accessories</h3>
-                  <p className="text-muted-foreground">Premium bags and gear</p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+        {categories.map((category) => (
+        
+          <Link
+            key={category.id}
+            to={`/products?category=${category.name}`}
+          >
+          
+            <Card className="group overflow-hidden hover:shadow-lg transition-shadow">
+        
+              <div className="aspect-video overflow-hidden bg-muted">
+        
+                <ImageWithFallback
+                  src={category.image}
+                  alt={category.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+      
+              </div>
+        
+              <CardContent className="p-6">
+        
+                <h3 className="text-xl font-semibold mb-2">
+                  {category.name}
+                </h3>
+        
+                <p className="text-muted-foreground">
+                  {category.description}
+                </p>
+        
+              </CardContent>
+        
+            </Card>
+        
+          </Link>
+        ))}
+      </div>
+      </div>
       </section>
 
       {/* CTA Section */}

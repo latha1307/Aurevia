@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { CreditCard, Truck, Check } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
@@ -216,7 +216,7 @@ export function CheckoutPage() {
                       <div key={item.id} className="flex gap-4">
                         <div className="w-16 h-16 rounded-lg overflow-hidden bg-muted">
                           <img
-                            src={item.image}
+                            src={item.image || 'https://via.placeholder.com/250?text=No+Image'}
                             alt={item.name}
                             className="w-full h-full object-cover"
                           />

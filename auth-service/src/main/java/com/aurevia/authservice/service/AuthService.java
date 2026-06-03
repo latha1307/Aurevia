@@ -28,39 +28,50 @@ public class AuthService {
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole("USER");
+        user.setRole("customer");
 
         userRepository.save(user);
 
         String token = jwtService.generateToken(user.getEmail(), user.getRole());
-        return new AuthResponse("Registration successful", token);
+        return new AuthResponse(
+                "Registration successful",
+                token,
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getRole()
+        );
     }
 
     public AuthResponse login(LoginRequest request) {
 
-    User user = userRepository
-            .findByEmail(request.getEmail())
-            .orElseThrow(() ->
-                    new RuntimeException("User not found"));
+        User user = userRepository
+                .findByEmail(request.getEmail())
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
 
-    boolean passwordMatches =
-            passwordEncoder.matches(
-                    request.getPassword(),
-                    user.getPassword()
-            );
+        boolean passwordMatches =
+                passwordEncoder.matches(
+                        request.getPassword(),
+                        user.getPassword()
+                );
 
-    if (!passwordMatches) {
-        throw new RuntimeException("Invalid password");
+        if (!passwordMatches) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        String token = jwtService.generateToken(
+                user.getEmail(),
+                user.getRole()
+        );
+
+        return new AuthResponse(
+                "Login successful",
+                token,
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getRole()
+        );
     }
-
-    String token = jwtService.generateToken(
-            user.getEmail(),
-            user.getRole()
-    );
-
-    return new AuthResponse(
-            "Login successful",
-            token
-    );
-}
 }

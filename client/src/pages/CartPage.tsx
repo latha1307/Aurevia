@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
@@ -48,7 +48,7 @@ export function CartPage() {
                 <div className="flex gap-4">
                   <div className="w-24 h-24 rounded-lg overflow-hidden bg-muted flex-shrink-0">
                     <img
-                      src={item.image}
+                      src={item.imageUrl || 'https://via.placeholder.com/250?text=No+Image'}
                       alt={item.name}
                       className="w-full h-full object-cover"
                     />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
@@ -166,7 +166,7 @@ export const SignupPage: React.FC = () => {
         <CardFooter>
           <div className="text-sm text-center text-muted-foreground w-full">
             Already have an account?{' '}
-            <Link to="/login" className="text-primary hover:underline">
+            <Link to="/auth/login" className="text-primary hover:underline">
               Sign in
             </Link>
           </div>

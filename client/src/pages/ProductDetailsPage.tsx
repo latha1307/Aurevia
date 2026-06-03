@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useParams, useNavigate, Link } from "react-router";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { Star, Heart, ShoppingCart, Truck, Shield, ArrowLeft } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
@@ -12,9 +12,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../components/ui/select";
-import { mockProducts } from "../data/mockData";
+import { getProductById } from "../api/product.api";
 import { useApp } from "../contexts/AppContext";
 import { toast } from "sonner";
+import type { Product } from "../types";
 
 export function ProductDetailsPage() {
   const { id } = useParams();
@@ -24,7 +25,20 @@ export function ProductDetailsPage() {
   const [quantity, setQuantity] = useState(1);
   const [selectedVariants, setSelectedVariants] = useState<Record<string, string>>({});
 
-  const product = mockProducts.find((p) => p.id === id);
+  const [product, setProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const product = await getProductById(id);
+        setProduct(product);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
 
   if (!product) {
     return (
@@ -42,7 +56,7 @@ export function ProductDetailsPage() {
       name: product.name,
       price: product.price,
       quantity,
-      image: product.image,
+      imageUrl: product.imageUrl,
       variant: Object.values(selectedVariants).join(", "),
     });
     toast.success("Added to cart");
@@ -58,9 +72,9 @@ export function ProductDetailsPage() {
     }
   };
 
-  const relatedProducts = mockProducts
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
+  // const relatedProducts = getProducts()
+  //   .filter((p) => p.category === product.category && p.id !== product.id)
+  //   .slice(0, 4);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -99,13 +113,13 @@ export function ProductDetailsPage() {
         <div>
           <div className="aspect-square overflow-hidden rounded-xl bg-muted mb-4">
             <img
-              src={product.images[selectedImage]}
+              src={product.images?.[selectedImage]}
               alt={product.name}
               className="w-full h-full object-cover"
             />
           </div>
           <div className="grid grid-cols-4 gap-4">
-            {product.images.map((image, index) => (
+            {product.images?.map((image, index) => (
               <button
                 key={index}
                 onClick={() => setSelectedImage(index)}
@@ -189,7 +203,7 @@ export function ProductDetailsPage() {
                   <SelectValue placeholder={`Select ${variant.name}`} />
                 </SelectTrigger>
                 <SelectContent>
-                  {variant.options.map((option) => (
+                  {variant.options?.map((option) => (
                     <SelectItem key={option} value={option}>
                       {option}
                     </SelectItem>
@@ -230,7 +244,7 @@ export function ProductDetailsPage() {
               size="lg"
               className="flex-1"
               onClick={handleAddToCart}
-              disabled={!product.inStock}
+              disabled={!product.stock}
             >
               <ShoppingCart className="h-5 w-5 mr-2" />
               Add to Cart
@@ -287,7 +301,7 @@ export function ProductDetailsPage() {
             <CardContent className="p-6">
               {product.specifications ? (
                 <div className="space-y-3">
-                  {product.specifications.map((spec, index) => (
+                  {product.specifications?.map((spec, index) => (
                     <div
                       key={index}
                       className="flex justify-between py-2 border-b last:border-0"
@@ -313,7 +327,7 @@ export function ProductDetailsPage() {
       </Tabs>
 
       {/* Related Products */}
-      {relatedProducts.length > 0 && (
+      {/* {relatedProducts.length > 0 && (
         <div>
           <h2 className="text-2xl font-bold mb-6">Related Products</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -346,7 +360,7 @@ export function ProductDetailsPage() {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
