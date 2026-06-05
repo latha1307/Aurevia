@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Product } from '../types';
+import type { Product } from '../types';
 import { Card, CardContent, CardFooter } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -43,7 +43,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, className }) 
     >
       <div className="relative aspect-square overflow-hidden bg-muted">
         <img
-          src={product.image}
+          src={product.imageUrl}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />

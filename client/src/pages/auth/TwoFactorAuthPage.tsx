@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '../../components/ui/card';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '../../components/ui/input-otp';
-import { Package, Smartphone } from 'lucide-react';
+import { Smartphone } from 'lucide-react';
 import { toast } from 'sonner';
 import { Alert, AlertDescription } from '../../components/ui/alert';
 

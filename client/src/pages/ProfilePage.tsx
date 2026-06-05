@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Badge } from '../components/ui/badge';
 import { Separator } from '../components/ui/separator';
-import { User, Mail, Phone, MapPin, Lock, Bell, CreditCard, Package } from 'lucide-react';
+import { Mail, Phone, MapPin, Lock, CreditCard, Package } from 'lucide-react';
 import { toast } from 'sonner';
 import { Switch } from '../components/ui/switch';
 

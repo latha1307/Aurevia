@@ -157,7 +157,7 @@ export function OrdersPage() {
                                     <div key={item.id} className="flex gap-4">
                                       <div className="w-16 h-16 rounded-lg overflow-hidden bg-muted">
                                         <img
-                                          src={item.image}
+                                          src={item.imageUrl}
                                           alt={item.name}
                                           className="w-full h-full object-cover"
                                         />
@@ -182,13 +182,13 @@ export function OrdersPage() {
                               <div>
                                 <h4 className="font-semibold mb-2">Shipping Address</h4>
                                 <p className="text-sm">
-                                  {order.shipping.name}
+                                  {order.shippingAddress.name}
                                   <br />
-                                  {order.shipping.address}
+                                  {order.shippingAddress.address}
                                   <br />
-                                  {order.shipping.city}, {order.shipping.zip}
+                                  {order.shippingAddress.city}, {order.shippingAddress.zip}
                                   <br />
-                                  {order.shipping.country}
+                                  {order.shippingAddress.country}
                                 </p>
                                 {order.tracking && (
                                   <div className="mt-4">
@@ -213,7 +213,7 @@ export function OrdersPage() {
                         <div key={item.id} className="flex gap-3">
                           <div className="w-16 h-16 rounded-lg overflow-hidden bg-muted flex-shrink-0">
                             <img
-                              src={item.image}
+                              src={item.imageUrl}
                               alt={item.name}
                               className="w-full h-full object-cover"
                             />

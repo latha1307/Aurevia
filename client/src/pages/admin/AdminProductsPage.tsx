@@ -12,7 +12,7 @@ import { Textarea } from "../../components/ui/textarea";
 
 export function AdminProductsPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [products, setProducts] = useState(mockProducts);
+  const [products, _] = useState(mockProducts);
 
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -112,7 +112,7 @@ export function AdminProductsPage() {
                   <TableCell>
                     <div className="flex items-center gap-3">
                       <img
-                        src={product.image}
+                        src={product.imageUrl}
                         alt={product.name}
                         className="size-10 rounded-md object-cover"
                       />

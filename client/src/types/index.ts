@@ -49,6 +49,9 @@ export interface CartItem {
   id: string;
   product: Product;
   quantity: number;
+  name: string;
+  imageUrl: string;
+  price: number;
 }
 
 export interface Order {
@@ -60,15 +63,40 @@ export interface Order {
   paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
   shippingAddress: Address;
   trackingNumber?: string;
+  tracking?: string;
+  orderNumber: string;
+  date: string;
   createdAt: string;
   updatedAt: string;
 }
 
+export interface Shipping {
+  id: string;
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+  cost: number;
+  estimatedDelivery: string;
+  carrier: string;
+  trackingUrl?: string;
+}
+
+export interface Items {
+  id: number;
+  product: Product;
+  quantity: number;
+}
+
 export interface Address {
+  name: string;
+  address: string;
   street: string;
   city: string;
   state: string;
-  zipCode: string;
+  zip: string;
   country: string;
 }
 

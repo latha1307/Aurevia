@@ -19,7 +19,7 @@ export function WishlistPage() {
       name: product.name,
       price: product.price,
       quantity: 1,
-      image: product.image,
+      imageUrl: product.imageUrl,
     });
     toast.success("Added to cart");
   };
@@ -63,7 +63,7 @@ export function WishlistPage() {
             <Link to={`/products/${product.id}`}>
               <div className="aspect-square overflow-hidden bg-muted relative">
                 <img
-                  src={product.image}
+                  src={product.imageUrl}
                   alt={product.name}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
@@ -80,7 +80,7 @@ export function WishlistPage() {
                     % OFF
                   </Badge>
                 )}
-                {!product.inStock && (
+                {!product.stock && (
                   <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                     <Badge variant="secondary">Out of Stock</Badge>
                   </div>
@@ -93,9 +93,9 @@ export function WishlistPage() {
                   {product.name}
                 </h3>
               </Link>
-              <p className="text-sm text-muted-foreground mb-2">
+              {/* <p className="text-sm text-muted-foreground mb-2">
                 {product.brand}
-              </p>
+              </p> */}
               <div className="flex items-baseline gap-2 mb-4">
                 <span className="text-lg font-bold">${product.price}</span>
                 {product.originalPrice && (
@@ -109,7 +109,7 @@ export function WishlistPage() {
                   size="sm"
                   className="flex-1"
                   onClick={() => handleAddToCart(product)}
-                  disabled={!product.inStock}
+                  disabled={!product.stock}
                 >
                   <ShoppingCart className="h-4 w-4 mr-2" />
                   Add to Cart

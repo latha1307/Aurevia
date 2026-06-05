@@ -5,7 +5,6 @@ import { AdminSidebar } from "../components/AdminSidebar";
 import { useApp } from "../contexts/AppContext";
 import { Alert, AlertDescription } from "../components/ui/alert";
 import { AlertCircle } from "lucide-react";
-import { Button } from "../components/ui/button";
 
 export function AdminLayout() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);

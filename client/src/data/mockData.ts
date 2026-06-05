@@ -7,7 +7,7 @@ export const mockProducts: Product[] = [
     description: 'Premium noise-cancelling wireless headphones with 30-hour battery life',
     price: 299.99,
     originalPrice: 399.99,
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500',
     images: [
       'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500',
       'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=500',
@@ -28,7 +28,7 @@ export const mockProducts: Product[] = [
     description: 'Advanced fitness tracking with heart rate monitor and GPS',
     price: 449.99,
     originalPrice: 549.99,
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500',
     images: [
       'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500',
       'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500'
@@ -47,7 +47,7 @@ export const mockProducts: Product[] = [
     name: 'Minimalist Backpack',
     description: 'Sleek laptop backpack with USB charging port and water-resistant material',
     price: 89.99,
-    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=500',
     category: 'Accessories',
     rating: 4.7,
     reviews: 312,
@@ -62,7 +62,7 @@ export const mockProducts: Product[] = [
     description: 'Premium mechanical gaming keyboard with customizable RGB lighting',
     price: 159.99,
     originalPrice: 199.99,
-    image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500',
     category: 'Electronics',
     rating: 4.9,
     reviews: 421,
@@ -77,7 +77,7 @@ export const mockProducts: Product[] = [
     name: 'Leather Wallet',
     description: 'Handcrafted genuine leather wallet with RFID protection',
     price: 49.99,
-    image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=500',
     category: 'Accessories',
     rating: 4.5,
     reviews: 156,
@@ -91,7 +91,7 @@ export const mockProducts: Product[] = [
     name: 'Portable Speaker',
     description: 'Waterproof Bluetooth speaker with 360° sound and 12-hour battery',
     price: 79.99,
-    image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=500',
     category: 'Electronics',
     rating: 4.4,
     reviews: 267,
@@ -105,7 +105,7 @@ export const mockProducts: Product[] = [
     name: 'Sunglasses Classic',
     description: 'UV protection polarized sunglasses with premium metal frame',
     price: 129.99,
-    image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500',
     category: 'Accessories',
     rating: 4.6,
     reviews: 198,
@@ -120,7 +120,7 @@ export const mockProducts: Product[] = [
     description: 'Slim fitness band with sleep tracking and heart rate monitoring',
     price: 99.99,
     originalPrice: 129.99,
-    image: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=500',
     category: 'Wearables',
     rating: 4.3,
     reviews: 143,
@@ -134,7 +134,7 @@ export const mockProducts: Product[] = [
     name: 'Desk Lamp LED',
     description: 'Modern LED desk lamp with adjustable brightness and color temperature',
     price: 59.99,
-    image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=500',
     category: 'Home',
     rating: 4.7,
     reviews: 289,
@@ -148,7 +148,7 @@ export const mockProducts: Product[] = [
     name: 'Running Shoes',
     description: 'Lightweight running shoes with responsive cushioning',
     price: 139.99,
-    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500',
     category: 'Footwear',
     rating: 4.8,
     reviews: 512,
@@ -163,7 +163,7 @@ export const mockProducts: Product[] = [
     name: 'Coffee Maker',
     description: 'Programmable coffee maker with thermal carafe and auto-brew',
     price: 89.99,
-    image: 'https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?w=500',
     category: 'Home',
     rating: 4.5,
     reviews: 176,
@@ -177,7 +177,7 @@ export const mockProducts: Product[] = [
     name: 'Yoga Mat Premium',
     description: 'Extra thick non-slip yoga mat with carrying strap',
     price: 39.99,
-    image: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=500',
+    imageUrl: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=500',
     category: 'Fitness',
     rating: 4.6,
     reviews: 234,
@@ -193,20 +193,26 @@ export const mockOrders: Order[] = [
     id: 'ORD-001',
     userId: 'user1',
     items: [
-      { id: '1', product: mockProducts[0], quantity: 1 },
-      { id: '2', product: mockProducts[2], quantity: 2 }
+      { id: '1', product: mockProducts[0], quantity: 1, name: mockProducts[0].name, imageUrl: mockProducts[0].imageUrl, price: mockProducts[0].price },
+      { id: '2', product: mockProducts[2], quantity: 2, name: mockProducts[2].name, imageUrl: mockProducts[2].imageUrl, price: mockProducts[2].price }
     ],
     total: 479.97,
     status: 'delivered',
     paymentStatus: 'paid',
     shippingAddress: {
+      name: 'John Doe',
+      address: '123 Main St',
       street: '123 Main St',
       city: 'New York',
       state: 'NY',
-      zipCode: '10001',
+      zip: '10001',
       country: 'USA'
+
     },
     trackingNumber: 'TRK123456789',
+    tracking: 'Delivered on May 15, 2026',
+    orderNumber: '1001',
+    date: '2026-05-10T10:30:00Z',
     createdAt: '2026-05-10T10:30:00Z',
     updatedAt: '2026-05-15T14:20:00Z'
   },
@@ -214,19 +220,24 @@ export const mockOrders: Order[] = [
     id: 'ORD-002',
     userId: 'user1',
     items: [
-      { id: '3', product: mockProducts[1], quantity: 1 }
+      { id: '3', product: mockProducts[1], quantity: 1, name: mockProducts[1].name, imageUrl: mockProducts[1].imageUrl, price: mockProducts[1].price }
     ],
     total: 449.99,
     status: 'shipped',
     paymentStatus: 'paid',
     shippingAddress: {
+      name: 'John Doe',
+      address: '123 Main St',
       street: '123 Main St',
       city: 'New York',
       state: 'NY',
-      zipCode: '10001',
+      zip: '10001',
       country: 'USA'
     },
     trackingNumber: 'TRK987654321',
+    tracking: 'Shipped on May 14, 2026',
+    orderNumber: '1002',
+    date: '2026-05-12T14:45:00Z',
     createdAt: '2026-05-14T15:45:00Z',
     updatedAt: '2026-05-16T09:10:00Z'
   },
@@ -234,19 +245,24 @@ export const mockOrders: Order[] = [
     id: 'ORD-003',
     userId: 'user2',
     items: [
-      { id: '4', product: mockProducts[3], quantity: 1 },
-      { id: '5', product: mockProducts[5], quantity: 1 }
+      { id: '4', product: mockProducts[3], quantity: 1, name: mockProducts[3].name, imageUrl: mockProducts[3].imageUrl, price: mockProducts[3].price },
+      { id: '5', product: mockProducts[5], quantity: 1, name: mockProducts[5].name, imageUrl: mockProducts[5].imageUrl, price: mockProducts[5].price }
     ],
     total: 239.98,
     status: 'processing',
     paymentStatus: 'paid',
     shippingAddress: {
+      name: 'Jane Smith',
+      address: '456 Oak Ave',
       street: '456 Oak Ave',
       city: 'Los Angeles',
       state: 'CA',
-      zipCode: '90001',
+      zip: '90001',
       country: 'USA'
     },
+    tracking: 'Processing',
+    orderNumber: '1003',
+    date: '2026-05-16T08:20:00Z',
     createdAt: '2026-05-16T08:20:00Z',
     updatedAt: '2026-05-16T10:30:00Z'
   }

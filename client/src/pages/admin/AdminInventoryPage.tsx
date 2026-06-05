@@ -119,7 +119,7 @@ export function AdminInventoryPage() {
                     <TableCell>
                       <div className="flex items-center gap-3">
                         <img
-                          src={product.image}
+                          src={product.imageUrl}
                           alt={product.name}
                           className="size-10 rounded-md object-cover"
                         />
