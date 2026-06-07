@@ -18,6 +18,9 @@ public class CorsConfig {
         config.addAllowedOrigin(
                 "http://localhost:5173"
         );
+        config.addAllowedOrigin(
+                "https://aurevia-livid.vercel.app"
+        );
 
         config.addAllowedHeader("*");
 
