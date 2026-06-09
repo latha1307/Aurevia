@@ -1,0 +1,14 @@
+server:
+  port: ${AUTH_SERVICE_PORT:8081}
+
+spring:
+  application:
+    name: AUTH-SERVICE
+
+  data:
+    mongodb:
+      uri: ${DB_URL}
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVER_URL}
