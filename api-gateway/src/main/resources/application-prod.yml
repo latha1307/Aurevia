@@ -33,10 +33,10 @@ spring:
             predicates:
               - Path=/api/categories/**
 
-          -  id: cart-service
-             uri: lb://CART-SERVICE
-             predicates:
-               - Path=/api/cart/**
+          - id: cart-service
+            uri: lb://CART-SERVICE
+            predicates:
+              - Path=/api/cart/**
 
 eureka:
   client:
@@ -44,3 +44,9 @@ eureka:
       defaultZone: ${EUREKA_SERVER_URL}
   instance:
     prefer-ip-address: false
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.loadbalancer: DEBUG
+    reactor.netty: DEBUG
